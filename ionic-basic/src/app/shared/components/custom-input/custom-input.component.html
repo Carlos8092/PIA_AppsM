@@ -1,3 +1,13 @@
-<p>
-  custom-input works!
-</p>
+<ion-item class="custom-input" lines="none">
+  <ion-icon *ngIf="icon" color="primary" slot="start" [name]="icon"></ion-icon>
+
+
+  <ion-input 
+  [type] = "type"
+  [autocomplete] = "autocomplete"
+  [label] = "label"
+  [formControl] = "control"
+  label-placement = "floating"
+
+  ></ion-input>
+</ion-item>

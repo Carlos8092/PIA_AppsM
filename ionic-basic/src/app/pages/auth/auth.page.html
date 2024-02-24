@@ -1,13 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>auth</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Login"></app-header>
+<ion-content>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">auth</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="d-flex-center">
+        <form formGroup = "string" class = "auth-form" (ngSubmit) = "submit()" (keypress.enter) = "submit()">
+            <app-custom-input 
+            icon="mail-outline" 
+            autocomplete="email"
+            [control] = "form.controls.email"
+            type = "email"
+            label = "Email"
+            ></app-custom-input>
+    
+            <app-custom-input 
+            icon="lock-closed-outline" 
+            [control] = "form.controls.password"
+            type = "password"
+            label = "Password"
+            ></app-custom-input>
+    
+            <ion-button expand="block" type="submit" mode="ios" class="submit">
+                Enter
+            </ion-button>
+
+            {{form.value | json}}
+        </form>
+    </div>
 </ion-content>
