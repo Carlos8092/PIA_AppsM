@@ -2,7 +2,11 @@
 <ion-content>
 
     <div class="d-flex-center">
-        <form formGroup = "string" class = "auth-form" (ngSubmit) = "submit()" (keypress.enter) = "submit()">
+        <form [formGroup] = "form" class = "auth-form" (ngSubmit) = "submit()" (keypress.enter) = "submit()">
+            
+            <app-logo></app-logo>
+            
+            <!------------EMAIL----------------->
             <app-custom-input 
             icon="mail-outline" 
             autocomplete="email"
@@ -11,18 +15,34 @@
             label = "Email"
             ></app-custom-input>
     
+            <div class="validators" *ngIf = "form.controls.email.errors && form.controls.email.touched">
+                <div *ngIf = "form.controls.email.errors?.['required']">Ingresa un correo</div>
+                <div *ngIf = "form.controls.email.errors?.['email']">Ingresa un correo valido</div>
+            </div>
+
+            <!------------PASSWORD----------------->
             <app-custom-input 
             icon="lock-closed-outline" 
             [control] = "form.controls.password"
             type = "password"
             label = "Password"
             ></app-custom-input>
+
+            <div class="validators" *ngIf = "form.controls.password.errors && form.controls.password.touched">
+                <div *ngIf = "form.controls.password.errors?.['required']">Ingresa una contraseña</div>
+            </div>
+
+            <p class="link" routerLink = "forgot-password">Forgot Password</p>
     
-            <ion-button expand="block" type="submit" mode="ios" class="submit">
+            <ion-button expand="block" type="submit" mode="ios" class="submit" [disabled] = "form.invalid">
                 Enter
             </ion-button>
 
-            {{form.value | json}}
+            <ion-button expand="block" mode="ios" fill = "outline" class="ion-margin-top" routerLink = "sign-up">
+                Sign up
+                <ion-icon slot="end" name="person-add-outline"></ion-icon>
+            </ion-button>
+
         </form>
     </div>
 </ion-content>
