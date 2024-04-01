@@ -12,7 +12,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class ForgotPasswordPage implements OnInit {
 
   form = new FormGroup({
-    email: new FormControl("", [Validators.required, Validators.email]),
+    email: new FormControl("", [Validators.required, Validators.email])
   })
 
   firebaseSvc = inject(FirebaseService);
@@ -37,7 +37,7 @@ export class ForgotPasswordPage implements OnInit {
           icon: 'send',
         });
 
-        this.utilsSvc.routerLink('');
+        this.utilsSvc.routerLink('auth');
         this.form.reset();
 
       }).catch(error => {

@@ -7,8 +7,7 @@ import { UtilsService } from '../services/utils.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthLogGuard implements CanActivate {
-  
+export class AuthOutGuard implements CanActivate {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
@@ -16,22 +15,20 @@ export class AuthLogGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      let user = localStorage.getItem('user');
       
       return new Promise((resolve) => {
 
         this.firebaseSvc.getAuth().onAuthStateChanged((auth) =>{
-          if(auth){
-            if (user) {
-              resolve(true);
-            }
+          if(!auth){
+            resolve(true);
           }else{
-            this.utilsSvc.routerLink('');
+            this.utilsSvc.routerLink('main/home');
             resolve(false);
           }
         } )
       
       });
   }
+  
   
 }
