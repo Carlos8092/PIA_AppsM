@@ -45,7 +45,7 @@ export class SignUpPage implements OnInit {
         console.log(error);
         
         this.utilsSvc.presentToast({
-          message: 'Auth Error: Email or Password is incorrect',
+          message: 'Email have already exist',
           duration: 4000,
           color: 'danger',
           position: 'bottom',
