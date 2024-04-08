@@ -1,6 +1,6 @@
 import { Inject, Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonSpinner, LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import { ActionSheetController, AlertController, AlertOptions, IonSpinner, LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
 import { AddUpdateObjectComponent } from '../shared/components/add-update-object/add-update-object.component';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -15,6 +15,7 @@ export class UtilsService {
   toastCtrl = inject(ToastController);
   router = inject(Router);
   modalCtrl = inject(ModalController);
+  alertCtrl = inject(AlertController);
 
   //----------------LOADING-----------------
   loading() {
@@ -23,6 +24,13 @@ export class UtilsService {
       message: 'Loading',
       duration: 3000,
     });
+  }
+
+  //--------------ALERT--------------------
+  async presentAlert(opts?: AlertOptions) {
+    const alert = await this.alertCtrl.create(opts);
+  
+    await alert.present();
   }
 
   //--------------TOAST--------------------
@@ -62,17 +70,24 @@ export class UtilsService {
     return this.modalCtrl.dismiss(data);
   }
 
+  
   //------TAKE PICTURE-------
-  async takePicture (promptLabelHeader: string){
+  async takePicture (){
     return await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
-      source: CameraSource.Prompt,
-      promptLabelHeader,
-      promptLabelPhoto: 'Select image',
-      promptLabelPicture: 'Take a picture',
-      promptLabelCancel: 'Cancel'
+      source: CameraSource.Camera
+    });
+  };
+
+  //------SELECT IMAGE--------
+  async selectPicture (){
+    return await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos
     });
   };
 }
