@@ -91,7 +91,6 @@ export class AddUpdateObjectComponent implements OnInit {
 
   async createProduct() {
 
-
     let path = `users/${this.user.uid}/products`;
 
     const loading = await this.utilsSvc.loading();

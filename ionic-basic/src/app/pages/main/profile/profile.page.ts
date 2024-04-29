@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
+  firebaseSvc = inject(FirebaseService)
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  //------SIGN OUT------
+  signOut(){
+    this.firebaseSvc.signOut();
   }
 
 }
