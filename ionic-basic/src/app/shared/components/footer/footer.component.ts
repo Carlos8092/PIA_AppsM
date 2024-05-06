@@ -11,13 +11,15 @@ export class FooterComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   router = inject(Router);
 
   routerlink(url: string){
-    this.router.navigateByUrl(url);
-    console.log('EXITOOO');
-  }
 
+    this.router.navigateByUrl(url);
+
+  }
+  
 }

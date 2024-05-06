@@ -89,6 +89,20 @@ export class AddUpdateObjectComponent implements OnInit {
     }
   }
 
+
+  setNumberInput(){
+
+    let {soldUnits, price} = this.form.controls;
+
+    if(soldUnits.value){
+      soldUnits.setValue(parseFloat(soldUnits.value));
+    }
+
+    if(price.value){
+      price.setValue(parseFloat(price.value));
+    }
+  }
+
   async createProduct() {
 
     let path = `users/${this.user.uid}/products`;
@@ -158,7 +172,7 @@ export class AddUpdateObjectComponent implements OnInit {
       this.utilsSvc.dismissModal({ success: true });
 
       this.utilsSvc.presentToast({
-        message: 'Update product',
+        message: 'Product update',
         duration: 4000,
         color: 'success',
         position: 'bottom',
@@ -170,7 +184,7 @@ export class AddUpdateObjectComponent implements OnInit {
       console.log(error);
 
       this.utilsSvc.presentToast({
-        message: 'Product have not update yet',
+        message: 'Product havent update yet',
         duration: 4000,
         color: 'danger',
         position: 'bottom',

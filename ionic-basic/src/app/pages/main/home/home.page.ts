@@ -4,6 +4,7 @@ import { user } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateObjectComponent } from 'src/app/shared/components/add-update-object/add-update-object.component';
+import { orderBy } from 'firebase/firestore'
 
 @Component({
   selector: 'app-home',
@@ -51,7 +52,12 @@ export class HomePage implements OnInit {
   //------GET PRODUCTS IN HOME-----
   getProducts(){
     let path = `users/${this.user().uid}/products`;
-    let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+
+    let query = (
+      orderBy('soldUnits', 'desc')
+    )
+
+    let sub = this.firebaseSvc.getCollectionData(path, query).subscribe({
       next: (res: any) =>{
         console.log(res);
         this.products = res;
@@ -87,7 +93,7 @@ export class HomePage implements OnInit {
       console.log(error);
 
       this.utilsSvc.presentToast({
-        message: 'Product have not update yet',
+        message: 'Product havent delete yet',
         duration: 4000,
         color: 'danger',
         position: 'bottom',
@@ -103,7 +109,7 @@ export class HomePage implements OnInit {
     this.utilsSvc.presentAlert({
       header: 'Delete',
       mode: 'ios',
-      message: 'Are you sure to delete product?',
+      message: 'Deseas eliminar el producto?',
       buttons: [
         {
           text: 'Cancel'
