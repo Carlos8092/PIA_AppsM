@@ -40,7 +40,10 @@
     </ion-item-sliding>
   </ion-list>
 
-  
+  <div class="empty" *ngIf="!products.length">
+    <ion-icon name="pencil-outline"></ion-icon>
+    <h3>No hay productos disponibles</h3>
+    </div>
 
   <!-----------NEW OBJECT----------->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="addUpdateObject">
